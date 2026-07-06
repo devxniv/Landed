@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Landed - Job tracker",
+  "license": "ISC",
+  "author": "Nivedita",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "migrate": "node db/migrate.js",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pg": "^8.22.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
