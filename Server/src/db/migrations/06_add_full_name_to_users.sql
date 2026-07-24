@@ -1,0 +1,1 @@
+alter table users add column if not exists full_name varchar(255) not null default '';
