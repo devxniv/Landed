@@ -14,14 +14,16 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
 
   let decodedToken;
   try {
-    decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    decodedToken = jwt.verify(token, process.env.JWT_SECRET, {
+      algorithms: ["HS256"],
+    });
   } catch (error) {
     throw new ApiError(401, "Invalid or expired token");
   }
 
   const result = await pool.query(
     "SELECT id, email, full_name FROM users WHERE id = $1",
-    [decodedToken.id],
+    [decodedToken.sub],
   );
 
   if (result.rows.length === 0) {

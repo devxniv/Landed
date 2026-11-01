@@ -1,18 +1,26 @@
+import "dotenv/config";
 import app from "./app.js";
 import pool from "./db/dbConnection.js";
 
 const PORT = process.env.PORT || 3000;
 
-app.get("/", async (req, res) => {
-  try {
-    const result = await pool.query("SELECT NOW()");
-    res.json({ success: true, time: result.rows[0] });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false, error: err.message });
-  }
-});
+if (!process.env.JWT_SECRET) {
+  throw new Error("JWT_SECRET is not set");
+}
 
-app.listen(PORT, () => {
-  console.log(`App listening at port http://localhost:${PORT}`);
-});
+const startServer = async () => {
+  try {
+    // make sure the database is reachable before accepting requests
+    await pool.query("SELECT 1");
+    console.log("Database connected");
+
+    app.listen(PORT, () => {
+      console.log(`App listening on http://localhost:${PORT}`);
+    });
+  } catch (err) {
+    console.error("Database connection failed:", err);
+    process.exit(1);
+  }
+};
+
+startServer();

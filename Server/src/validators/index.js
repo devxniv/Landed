@@ -7,7 +7,8 @@ const userRegisterValidator = () => {
       .notEmpty()
       .withMessage("Email is required")
       .isEmail()
-      .withMessage("Email is invalid"),
+      .withMessage("Email is invalid")
+      .toLowerCase(),
 
     body("password")
       .trim()
@@ -20,10 +21,11 @@ const userRegisterValidator = () => {
       .matches(/[a-z]/)
       .withMessage("Password must contain atleast one lowercase letter")
       .matches(/[0-9]/)
-      .withMessage(/[^A-Za-z0-9]/)
+      .withMessage("Password must contain at least one number")
+      .matches(/[^A-Za-z0-9]/)
       .withMessage("Password must contain at least one special character"),
 
-    body("Fullname").optional().trim(),
+    body("full_name").optional().trim(),
   ];
 };
 
@@ -34,7 +36,8 @@ const loginValidator = () => {
       .notEmpty()
       .withMessage("Email is required")
       .isEmail()
-      .withMessage("Email is invalid"),
+      .withMessage("Email is invalid")
+      .toLowerCase(),
     body("password").notEmpty().withMessage("Password is required"),
   ];
 };
