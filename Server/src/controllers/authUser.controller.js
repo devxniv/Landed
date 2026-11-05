@@ -144,7 +144,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     .json(
       new ApiResponse(
         200,
-        { accessToken: signAccessToken(user) },
+        { accessToken: signAccessToken(user), user },
         "Token refreshed",
       ),
     );

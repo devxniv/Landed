@@ -7,7 +7,7 @@ import {
 } from "../controllers/authUser.controller.js";
 import { validate } from "../middlewares/validator.middleware.js";
 import { userRegisterValidator, loginValidator } from "../validators/index.js";
-
+import { authLimiter } from "../middlewares/rateLimiter.middleware.js";
 const authRouter = Router();
 
 //unsecured routes which doesn't require jwt authentication(no access token needed)
