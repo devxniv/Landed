@@ -21,7 +21,7 @@ app.use(
   }),
 );
 
-import healthCheckRouter from "./routes/healthCheck.route.js";
+import healthCheckRouter from "./routes/healthcheck.route.js";
 import authRouter from "./routes/auth.routes.js";
 
 app.use("/v1/healthcheck", healthCheckRouter);
