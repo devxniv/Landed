@@ -27,6 +27,10 @@ app.use("/v1", apiLimiter);
 app.use("/v1/healthcheck", healthCheckRouter);
 app.use("/v1/auth", authRouter);
 
+app.get("/", (req, res) => {
+  res.status(200).json({ success: true, message: "Landed API is running" });
+});
+
 // unknown routes -> JSON 404
 app.use((req, res, next) => {
   next(new ApiError(404, `Route ${req.method} ${req.originalUrl} not found`));
